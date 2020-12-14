@@ -1,18 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import { media } from '../styles';
+import LoginButton from './LoginButton';
+import { Main as MainStyle, media } from '../styles';
+
 import trends from '../images/trends.svg';
 
-const Main = styled.main`
-  flex: 1;
-
+const Main = styled(MainStyle)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding-top: 3rem;
-  padding-bottom: 6rem;
 
   ${media.md`
     flex-direction: row;
@@ -63,24 +59,7 @@ const SubHeading = styled.h2`
   margin-bottom: 1.75rem;
 `;
 
-const Button = styled.a`
-  display: inline-block;
-
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.primary};
-
-  font-size: 0.875rem;
-
-  text-decoration: none;
-
-  padding: 0.625rem 1.25rem;
-`;
-
-const ButtonIcon = styled(FontAwesomeIcon)`
-  margin-right: 0.5rem;
-`;
-
-const Landing = () => {
+const Home = () => {
   return (
     <Main>
       <ImageWrapper>
@@ -93,13 +72,10 @@ const Landing = () => {
           Bravado lets you view your top artists and tracks anytime, anywhere.
           No need to wait for Spotify Wrapped!
         </SubHeading>
-        <Button href='#'>
-          <ButtonIcon icon={['fab', 'spotify']} />
-          Log In with Spotify
-        </Button>
+        <LoginButton />
       </TextWrapper>
     </Main>
   );
 };
 
-export default Landing;
+export default Home;

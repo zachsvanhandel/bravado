@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { isAuthenticated, logOut } from '../auth';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -23,13 +25,17 @@ const Logo = styled(Link)`
 `;
 
 const Nav = styled.nav`
+  flex: 1;
+
   display: flex;
   align-items: center;
 
-  margin-left: auto;
+  margin-left: 0.5rem;
 `;
 
 const NavList = styled.ul`
+  flex: 1;
+
   display: flex;
 
   margin-top: 0;
@@ -38,6 +44,10 @@ const NavList = styled.ul`
 
 const NavListItem = styled.li`
   margin-left: 0.75rem;
+`;
+
+const AuthNavListItem = styled(NavListItem)`
+  margin-left: auto;
 `;
 
 const NavLink = styled(Link)`
@@ -49,15 +59,23 @@ const NavLink = styled(Link)`
 `;
 
 const Header = () => {
+  useLocation(); // force re-render on route change
+
   return (
     <HeaderWrapper>
       <Logo to='/'>Bravado</Logo>
 
       <Nav>
         <NavList>
-          <NavListItem>
-            <NavLink to='/login'>Log In</NavLink>
-          </NavListItem>
+          <AuthNavListItem>
+            {isAuthenticated() ? (
+              <NavLink to='/' onClick={logOut}>
+                Log Out
+              </NavLink>
+            ) : (
+              <NavLink to='/login'>Log In</NavLink>
+            )}
+          </AuthNavListItem>
         </NavList>
       </Nav>
     </HeaderWrapper>
