@@ -1,17 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
+import { mixins } from '../styles';
+
 const Button = styled.a`
-  display: inline-block;
-
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.primary};
-
-  font-size: 0.875rem;
-
-  text-decoration: none;
-
-  padding: 0.625rem 1.25rem;
+  ${mixins.button}
 `;
 
 const SpotifyIcon = styled(FontAwesomeIcon)`

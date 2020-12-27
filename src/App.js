@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Layout from './components/Layout';
 import Login from './components/Login';
+import NotFound from './components/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 
@@ -31,6 +32,10 @@ const App = () => {
             <PrivateRoute exact path='/dashboard'>
               <Dashboard />
             </PrivateRoute>
+
+            <PublicRoute>
+              <NotFound />
+            </PublicRoute>
           </Switch>
         </Layout>
       </Router>
