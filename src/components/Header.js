@@ -73,6 +73,9 @@ const Header = () => {
               <NavListItem>
                 <NavLink to='/artists'>Artists</NavLink>
               </NavListItem>
+              <NavListItem>
+                <NavLink to='/tracks'>Tracks</NavLink>
+              </NavListItem>
               <AuthNavListItem>
                 <NavLink to='/' onClick={logOut}>
                   Log Out

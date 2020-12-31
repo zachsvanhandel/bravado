@@ -10,6 +10,7 @@ import Login from './components/Login';
 import NotFound from './components/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import Tracks from './components/Tracks';
 
 import 'sanitize.css';
 import './icons';
@@ -36,6 +37,10 @@ const App = () => {
 
             <PrivateRoute exact path='/artists'>
               <Artists />
+            </PrivateRoute>
+
+            <PrivateRoute exact path='/tracks'>
+              <Tracks />
             </PrivateRoute>
 
             <PublicRoute>
