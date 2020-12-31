@@ -12,6 +12,11 @@ const mixins = {
     text-decoration: none;
 
     padding: 0.625rem 1.25rem;
+  `,
+  unstyledList: css`
+    list-style: none;
+    margin 0;
+    padding: 0;
   `
 };
 

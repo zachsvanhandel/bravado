@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle, theme } from './styles';
+import Artists from './components/Artists';
 import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Layout from './components/Layout';
@@ -31,6 +32,10 @@ const App = () => {
 
             <PrivateRoute exact path='/dashboard'>
               <Dashboard />
+            </PrivateRoute>
+
+            <PrivateRoute exact path='/artists'>
+              <Artists />
             </PrivateRoute>
 
             <PublicRoute>

@@ -1,0 +1,4 @@
+// artist types
+export const GET_ARTISTS_SUCCESS = 'GET_ARTISTS_SUCCESS';
+export const GET_ARTISTS_ERROR = 'GET_ARTISTS_ERROR';
+export const RESET_ARTISTS = 'RESET_ARTISTS';

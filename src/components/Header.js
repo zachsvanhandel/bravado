@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -67,15 +68,22 @@ const Header = () => {
 
       <Nav>
         <NavList>
-          <AuthNavListItem>
-            {isAuthenticated() ? (
-              <NavLink to='/' onClick={logOut}>
-                Log Out
-              </NavLink>
-            ) : (
+          {isAuthenticated() ? (
+            <Fragment>
+              <NavListItem>
+                <NavLink to='/artists'>Artists</NavLink>
+              </NavListItem>
+              <AuthNavListItem>
+                <NavLink to='/' onClick={logOut}>
+                  Log Out
+                </NavLink>
+              </AuthNavListItem>
+            </Fragment>
+          ) : (
+            <AuthNavListItem>
               <NavLink to='/login'>Log In</NavLink>
-            )}
-          </AuthNavListItem>
+            </AuthNavListItem>
+          )}
         </NavList>
       </Nav>
     </HeaderWrapper>

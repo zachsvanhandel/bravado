@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import artists from './artists';
+
+export default combineReducers({ artists });
