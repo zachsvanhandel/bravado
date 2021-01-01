@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 import LoginButton from './LoginButton';
 import { Main as MainStyle } from '../styles';
 import { logIn } from '../auth';
+import { setAlert } from '../actions/alerts';
 import { getHashParams } from '../utils';
 
 const Main = styled(MainStyle)`
@@ -13,7 +16,7 @@ const Main = styled(MainStyle)`
   justify-content: center;
 `;
 
-const Login = () => {
+const Login = ({ setAlert }) => {
   const history = useHistory();
 
   useEffect(() => {
@@ -21,12 +24,17 @@ const Login = () => {
 
     if (access_token && expires_in) {
       logIn(access_token, expires_in);
+
       history.push('/dashboard');
     } else if (error) {
-      // todo: add error handling
-      console.log(error);
+      setAlert(
+        'Error',
+        'An error occurred while attempting to login. Please try again.'
+      );
+
+      history.push('/login'); // remove hash params from url
     }
-  }, [history]);
+  }, [history, setAlert]);
 
   return (
     <Main>
@@ -35,4 +43,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
+export default connect(null, { setAlert })(Login);

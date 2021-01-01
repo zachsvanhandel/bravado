@@ -1,4 +1,5 @@
 import { GET_TRACKS_SUCCESS, GET_TRACKS_ERROR, RESET_TRACKS } from './types';
+import { setAlert } from './alerts';
 import { api } from '../utils';
 
 // get tracks
@@ -16,8 +17,12 @@ export const getTracks = (timeRange) => async (dispatch) => {
       type: GET_TRACKS_ERROR
     });
 
-    // todo: add error handling
-    console.log(err);
+    dispatch(
+      setAlert(
+        'error',
+        'An error occurred while attempting to retrieve track data. Please try refreshing the page.'
+      )
+    );
   }
 };
 

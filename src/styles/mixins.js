@@ -13,6 +13,15 @@ const mixins = {
 
     padding: 0.625rem 1.25rem;
   `,
+  unstyledButton: css`
+    all: unset;
+
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+  `,
   unstyledList: css`
     list-style: none;
     margin 0;

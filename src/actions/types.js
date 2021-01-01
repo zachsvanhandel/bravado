@@ -1,3 +1,7 @@
+// alert types
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
 // artist types
 export const GET_ARTISTS_SUCCESS = 'GET_ARTISTS_SUCCESS';
 export const GET_ARTISTS_ERROR = 'GET_ARTISTS_ERROR';
