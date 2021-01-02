@@ -11,3 +11,7 @@ export const RESET_ARTISTS = 'RESET_ARTISTS';
 export const GET_TRACKS_SUCCESS = 'GET_TRACKS_SUCCESS';
 export const GET_TRACKS_ERROR = 'GET_TRACKS_ERROR';
 export const RESET_TRACKS = 'RESET_TRACKS';
+
+// user types
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_ERROR = 'GET_USER_ERROR';
