@@ -5,23 +5,19 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import PageLayout from './PageLayout';
 import RankedItemList from './RankedItemList';
-import { getArtists, resetArtists } from '../actions/artists';
+import { getArtists } from '../actions/artists';
 import { useQuery } from '../hooks';
 
-const Artists = ({
-  artists: { artists, isLoading },
-  getArtists,
-  resetArtists
-}) => {
+const Artists = ({ artists, getArtists }) => {
   const timeRange = useQuery().get('time_range') || 'long_term';
 
   useEffect(() => {
-    setTimeout(() => {
-      getArtists(timeRange);
-    }, 500); // add artificial delay
-
-    return resetArtists;
-  }, [timeRange, getArtists, resetArtists]);
+    if (artists[timeRange].isLoading) {
+      setTimeout(() => {
+        getArtists(timeRange);
+      }, 500); // add artificial delay
+    }
+  }, [timeRange, artists, getArtists]);
 
   const links = [
     { url: '/artists?time_range=long_term', text: 'All Time' },
@@ -33,7 +29,7 @@ const Artists = ({
     return link.url.split('=')[1] === timeRange;
   };
 
-  return isLoading ? (
+  return artists[timeRange].isLoading ? (
     <Loading />
   ) : (
     <PageLayout
@@ -41,11 +37,11 @@ const Artists = ({
       links={links}
       isActiveLink={isActiveLink}
     >
-      {artists.length === 0 ? (
+      {artists[timeRange].data.length === 0 ? (
         <div>No data to display</div>
       ) : (
         <RankedItemList
-          items={artists}
+          items={artists[timeRange].data}
           getImageUrl={(artist) => artist.images[0].url}
           getText={(artist) => artist.name}
           getPopularity={(artist) => artist.popularity}
@@ -57,12 +53,11 @@ const Artists = ({
 
 Artists.propTypes = {
   artists: PropTypes.object.isRequired,
-  getArtists: PropTypes.func.isRequired,
-  resetArtists: PropTypes.func.isRequired
+  getArtists: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   artists: state.artists
 });
 
-export default connect(mapStateToProps, { getArtists, resetArtists })(Artists);
+export default connect(mapStateToProps, { getArtists })(Artists);

@@ -1,4 +1,4 @@
-import { GET_TRACKS_SUCCESS, GET_TRACKS_ERROR, RESET_TRACKS } from './types';
+import { GET_TRACKS_SUCCESS, GET_TRACKS_ERROR } from './types';
 import { setAlert } from './alerts';
 import { api } from '../utils';
 
@@ -10,7 +10,10 @@ export const getTracks = (timeRange) => async (dispatch) => {
 
     dispatch({
       type: GET_TRACKS_SUCCESS,
-      payload: res.data.items
+      payload: {
+        timeRange,
+        data: res.data.items
+      }
     });
   } catch (err) {
     dispatch({
@@ -24,11 +27,4 @@ export const getTracks = (timeRange) => async (dispatch) => {
       )
     );
   }
-};
-
-// reset tracks
-export const resetTracks = () => async (dispatch) => {
-  dispatch({
-    type: RESET_TRACKS
-  });
 };

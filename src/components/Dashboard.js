@@ -49,28 +49,36 @@ const TopTracksButton = styled(Link)`
   margin: 0.25rem;
 `;
 
-const Dashboard = ({ user: { user, isLoading }, getUser }) => {
+const Dashboard = ({ user, getUser }) => {
   useEffect(() => {
-    if (!user) {
+    if (user.isLoading) {
       setTimeout(() => {
         getUser();
       }, 500); // add artificial delay
     }
   }, [user, getUser]);
 
-  return isLoading ? (
+  return user.isLoading ? (
     <Loading />
   ) : (
     <Main>
-      <UserImage src={user.images[0].url} />
-      <LoginMessage>
-        Logged in as <strong>{user.display_name}</strong>
-      </LoginMessage>
+      {!user.data ? (
+        <div>User data unavailable</div>
+      ) : (
+        <>
+          <UserImage src={user.data.images[0].url} />
+          <LoginMessage>
+            Logged in as <strong>{user.data.display_name}</strong>
+          </LoginMessage>
 
-      <ButtonWrapper>
-        <TopArtistsButton to='/artists'>View your top artists</TopArtistsButton>
-        <TopTracksButton to='/tracks'>View your top tracks</TopTracksButton>
-      </ButtonWrapper>
+          <ButtonWrapper>
+            <TopArtistsButton to='/artists'>
+              View your top artists
+            </TopArtistsButton>
+            <TopTracksButton to='/tracks'>View your top tracks</TopTracksButton>
+          </ButtonWrapper>
+        </>
+      )}
     </Main>
   );
 };

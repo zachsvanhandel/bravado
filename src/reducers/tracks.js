@@ -1,12 +1,18 @@
-import {
-  GET_TRACKS_SUCCESS,
-  GET_TRACKS_ERROR,
-  RESET_TRACKS
-} from '../actions/types';
+import { GET_TRACKS_SUCCESS, GET_TRACKS_ERROR } from '../actions/types';
 
 const initialState = {
-  tracks: [],
-  isLoading: true
+  short_term: {
+    data: [],
+    isLoading: true
+  },
+  medium_term: {
+    data: [],
+    isLoading: true
+  },
+  long_term: {
+    data: [],
+    isLoading: true
+  }
 };
 
 const tracksReducer = (state = initialState, action) => {
@@ -16,17 +22,19 @@ const tracksReducer = (state = initialState, action) => {
     case GET_TRACKS_SUCCESS:
       return {
         ...state,
-        tracks: payload,
-        isLoading: false
+        [payload.timeRange]: {
+          data: payload.data,
+          isLoading: false
+        }
       };
     case GET_TRACKS_ERROR:
       return {
         ...state,
-        tracks: [],
-        isLoading: false
+        [payload.timeRange]: {
+          data: [],
+          isLoading: false
+        }
       };
-    case RESET_TRACKS:
-      return initialState;
     default:
       return state;
   }

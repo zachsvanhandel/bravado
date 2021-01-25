@@ -1,12 +1,18 @@
-import {
-  GET_ARTISTS_SUCCESS,
-  GET_ARTISTS_ERROR,
-  RESET_ARTISTS
-} from '../actions/types';
+import { GET_ARTISTS_SUCCESS, GET_ARTISTS_ERROR } from '../actions/types';
 
 const initialState = {
-  artists: [],
-  isLoading: true
+  short_term: {
+    data: [],
+    isLoading: true
+  },
+  medium_term: {
+    data: [],
+    isLoading: true
+  },
+  long_term: {
+    data: [],
+    isLoading: true
+  }
 };
 
 const artistsReducer = (state = initialState, action) => {
@@ -16,17 +22,19 @@ const artistsReducer = (state = initialState, action) => {
     case GET_ARTISTS_SUCCESS:
       return {
         ...state,
-        artists: payload,
-        isLoading: false
+        [payload.timeRange]: {
+          data: payload.data,
+          isLoading: false
+        }
       };
     case GET_ARTISTS_ERROR:
       return {
         ...state,
-        artists: [],
-        isLoading: false
+        [payload.timeRange]: {
+          data: [],
+          isLoading: false
+        }
       };
-    case RESET_ARTISTS:
-      return initialState;
     default:
       return state;
   }

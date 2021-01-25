@@ -5,19 +5,19 @@ import PropTypes from 'prop-types';
 import Loading from './Loading';
 import PageLayout from './PageLayout';
 import RankedItemList from './RankedItemList';
-import { getTracks, resetTracks } from '../actions/tracks';
+import { getTracks } from '../actions/tracks';
 import { useQuery } from '../hooks';
 
-const Tracks = ({ tracks: { tracks, isLoading }, getTracks, resetTracks }) => {
+const Tracks = ({ tracks, getTracks }) => {
   const timeRange = useQuery().get('time_range') || 'long_term';
 
   useEffect(() => {
-    setTimeout(() => {
-      getTracks(timeRange);
-    }, 500); // add artificial delay
-
-    return resetTracks;
-  }, [timeRange, getTracks, resetTracks]);
+    if (tracks[timeRange].isLoading) {
+      setTimeout(() => {
+        getTracks(timeRange);
+      }, 500); // add artificial delay
+    }
+  }, [timeRange, tracks, getTracks]);
 
   const links = [
     { url: '/tracks?time_range=long_term', text: 'All Time' },
@@ -29,7 +29,7 @@ const Tracks = ({ tracks: { tracks, isLoading }, getTracks, resetTracks }) => {
     return link.url.split('=')[1] === timeRange;
   };
 
-  return isLoading ? (
+  return tracks[timeRange].isLoading ? (
     <Loading />
   ) : (
     <PageLayout
@@ -37,11 +37,11 @@ const Tracks = ({ tracks: { tracks, isLoading }, getTracks, resetTracks }) => {
       links={links}
       isActiveLink={isActiveLink}
     >
-      {tracks.length === 0 ? (
+      {tracks[timeRange].data.length === 0 ? (
         <div>No data to display</div>
       ) : (
         <RankedItemList
-          items={tracks}
+          items={tracks[timeRange].data}
           getImageUrl={(track) => track.album.images[0].url}
           getText={(track) => track.name}
           getSubText={(track) =>
@@ -56,12 +56,11 @@ const Tracks = ({ tracks: { tracks, isLoading }, getTracks, resetTracks }) => {
 
 Tracks.propTypes = {
   tracks: PropTypes.object.isRequired,
-  getTracks: PropTypes.func.isRequired,
-  resetTracks: PropTypes.func.isRequired
+  getTracks: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   tracks: state.tracks
 });
 
-export default connect(mapStateToProps, { getTracks, resetTracks })(Tracks);
+export default connect(mapStateToProps, { getTracks })(Tracks);

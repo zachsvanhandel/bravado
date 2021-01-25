@@ -1,4 +1,4 @@
-import { GET_ARTISTS_SUCCESS, GET_ARTISTS_ERROR, RESET_ARTISTS } from './types';
+import { GET_ARTISTS_SUCCESS, GET_ARTISTS_ERROR } from './types';
 import { setAlert } from './alerts';
 import { api } from '../utils';
 
@@ -10,7 +10,10 @@ export const getArtists = (timeRange) => async (dispatch) => {
 
     dispatch({
       type: GET_ARTISTS_SUCCESS,
-      payload: res.data.items
+      payload: {
+        timeRange,
+        data: res.data.items
+      }
     });
   } catch (err) {
     dispatch({
@@ -24,11 +27,4 @@ export const getArtists = (timeRange) => async (dispatch) => {
       )
     );
   }
-};
-
-// reset artists
-export const resetArtists = () => async (dispatch) => {
-  dispatch({
-    type: RESET_ARTISTS
-  });
 };
