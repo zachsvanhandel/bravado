@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import LoginButton from './LoginButton';
 import { Main as MainStyle } from '../styles';
-import { logIn } from '../auth';
+import { logIn, getLoginRedirect, removeLoginRedirect } from '../auth';
 import { setAlert } from '../actions/alerts';
 import { getHashParams } from '../utils';
 
@@ -20,19 +20,21 @@ const Login = ({ setAlert }) => {
   const history = useHistory();
 
   useEffect(() => {
-    const { access_token, expires_in, error } = getHashParams();
+    const { access_token, expires_in, state, error } = getHashParams();
 
-    if (access_token && expires_in) {
+    const redirect = getLoginRedirect(state); // if state is valid, redirect will not be null
+    if (access_token && expires_in && redirect) {
       logIn(access_token, expires_in);
+      removeLoginRedirect(state);
 
-      history.push('/dashboard');
-    } else if (error) {
+      history.replace(redirect);
+    } else if (state || error) {
       setAlert(
-        'Error',
-        'An error occurred while attempting to login. Please try again.'
+        'warning',
+        'A problem was encountered while attempting to log in. Please try again.'
       );
 
-      history.push('/login'); // remove hash params from url
+      history.replace('/login'); // remove hash params from url
     }
   }, [history, setAlert]);
 

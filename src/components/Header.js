@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { isAuthenticated, logOut } from '../auth';
+import { useLoginLocation } from '../hooks';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -60,7 +61,7 @@ const NavLink = styled(Link)`
 `;
 
 const Header = () => {
-  useLocation(); // force re-render on route change
+  const loginLocation = useLoginLocation();
 
   return (
     <HeaderWrapper>
@@ -84,7 +85,7 @@ const Header = () => {
             </Fragment>
           ) : (
             <AuthNavListItem>
-              <NavLink to='/login'>Log In</NavLink>
+              <NavLink to={loginLocation}>Log In</NavLink>
             </AuthNavListItem>
           )}
         </NavList>
