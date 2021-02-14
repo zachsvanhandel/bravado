@@ -26,6 +26,11 @@ const mixins = {
     padding: 0.5rem 1.125rem;
     border: 0.125rem solid ${(props) => props.theme.colors.primary};
   `,
+  link: css`
+    color: ${(props) => props.theme.colors.primary};
+
+    text-decoration: none;
+  `,
   unstyledButton: css`
     all: unset;
 
