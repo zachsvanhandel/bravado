@@ -1,15 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
-import Fonts from '../fonts';
-
 const GlobalStyle = createGlobalStyle`
-  ${Fonts}
+  ${(props) => props.theme.fonts}}
 
   body {
+    ${(props) => props.theme.mixins.font}
+
     color: ${(props) => props.theme.colors.dark};
     background-color: ${(props) => props.theme.colors.white};
-
-    font-family: ${(props) => props.theme.fonts.primary};
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

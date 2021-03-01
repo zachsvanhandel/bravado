@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Loading from './Loading';
-import { Main as MainStyle, mixins } from '../styles';
+import { Main as MainStyle } from '../styles';
 import { getUser } from '../actions/user';
 
 const Main = styled(MainStyle)`
@@ -38,13 +38,13 @@ const ButtonWrapper = styled.div`
 `;
 
 const TopArtistsButton = styled(Link)`
-  ${mixins.button}
+  ${(props) => props.theme.mixins.button}
 
   margin: 0.25rem;
 `;
 
 const TopTracksButton = styled(Link)`
-  ${mixins.buttonAlt}
+  ${(props) => props.theme.mixins.buttonAlt}
 
   margin: 0.25rem;
 `;

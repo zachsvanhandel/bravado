@@ -2,12 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import { mixins } from '../styles';
 import { useLoginRedirectQueryParam } from '../hooks';
 import { setLoginRedirect } from '../auth';
 
 const Button = styled.a`
-  ${mixins.button}
+  ${(props) => props.theme.mixins.button}
 `;
 
 const SpotifyIcon = styled(FontAwesomeIcon)`

@@ -1,19 +1,19 @@
 import { css } from 'styled-components';
 
-const breakpoints = {
+const sizes = {
   sm: '36rem',
   md: '48rem',
   lg: '62rem',
   xl: '75rem'
 };
 
-const media = Object.keys(breakpoints).reduce((accumulator, label) => {
+const breakpoints = Object.keys(sizes).reduce((accumulator, label) => {
   accumulator[label] = (...args) => css`
-    @media (min-width: ${breakpoints[label]}) {
+    @media (min-width: ${sizes[label]}) {
       ${css(...args)};
     }
   `;
   return accumulator;
 }, {});
 
-export default media;
+export default breakpoints;

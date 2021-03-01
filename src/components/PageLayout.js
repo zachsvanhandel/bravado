@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Main, media, mixins } from '../styles';
+import { Main } from '../styles';
 
 const Header = styled.header`
   display: flex;
@@ -10,7 +10,7 @@ const Header = styled.header`
 
   margin-bottom: 2.5rem;
 
-  ${media.sm`
+  ${(props) => props.theme.breakpoints.sm`
     flex-direction: row;
     align-items: center;
   `}
@@ -25,13 +25,13 @@ const Title = styled.h1`
   margin-top: 0;
   margin-bottom: 0.875rem;
 
-  ${media.sm`
+  ${(props) => props.theme.breakpoints.sm`
     margin-bottom: 0;
   `}
 `;
 
 const RangeGroup = styled.ul`
-  ${mixins.unstyledList}
+  ${(props) => props.theme.mixins.unstyledList}
 
   display: flex;
 
@@ -39,7 +39,7 @@ const RangeGroup = styled.ul`
 
   border: 0.0625rem solid ${(props) => props.theme.colors.dark};
 
-  ${media.sm`
+  ${(props) => props.theme.breakpoints.sm`
     margin-left: auto;
   `};
 `;
@@ -47,7 +47,7 @@ const RangeGroup = styled.ul`
 const RangeItem = styled.li`
   flex: auto;
 
-  ${media.sm`
+  ${(props) => props.theme.breakpoints.sm`
     flex: unset;
   `}
 `;

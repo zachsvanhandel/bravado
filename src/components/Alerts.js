@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
-import { Container as ContainerStyle, media, mixins } from '../styles';
+import { Container as ContainerStyle } from '../styles';
 import { removeAlert } from '../actions/alerts';
 
 const Container = styled(ContainerStyle)`
@@ -21,7 +21,7 @@ const Alert = styled.div`
   margin-bottom: 1rem;
   border: 0.125rem solid ${(props) => props.theme.colors.dark};
 
-  ${media.sm`
+  ${(props) => props.theme.breakpoints.sm`
     width: 400px;
 
     margin-left: auto;
@@ -47,7 +47,7 @@ const Type = styled.div`
 `;
 
 const CloseButton = styled.button`
-  ${mixins.unstyledButton}
+  ${(props) => props.theme.mixins.unstyledButton}
 
   margin-left: auto;
 `;

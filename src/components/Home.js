@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import LoginButton from './LoginButton';
-import { Main as MainStyle, media } from '../styles';
+import { Main as MainStyle } from '../styles';
 
 import trends from '../images/trends.svg';
 
@@ -10,7 +10,7 @@ const Main = styled(MainStyle)`
   flex-direction: column;
   justify-content: center;
 
-  ${media.md`
+  ${(props) => props.theme.breakpoints.md`
     flex-direction: row;
     justify-content: unset;
     align-items: center;
@@ -20,7 +20,7 @@ const Main = styled(MainStyle)`
 const ImageWrapper = styled.div`
   padding-bottom: 3.5rem;
 
-  ${media.md`
+  ${(props) => props.theme.breakpoints.md`
     order: 2;
     flex: 3;
 
@@ -35,7 +35,7 @@ const Image = styled.img`
 `;
 
 const TextWrapper = styled.div`
-  ${media.md`
+  ${(props) => props.theme.breakpoints.md`
     order: 1;
     flex: 2;
   `}

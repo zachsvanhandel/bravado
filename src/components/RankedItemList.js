@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Popularity from './Popularity';
-import { mixins } from '../styles';
 
 const ItemList = styled.ol`
-  ${mixins.unstyledList}
+  ${(props) => props.theme.mixins.unstyledList}
 `;
 
 const Item = styled.li`

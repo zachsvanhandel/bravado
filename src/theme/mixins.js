@@ -26,6 +26,9 @@ const mixins = {
     padding: 0.5rem 1.125rem;
     border: 0.125rem solid ${(props) => props.theme.colors.primary};
   `,
+  font: css`
+    font-family: Fira Sans, sans-serif;
+  `,
   link: css`
     color: ${(props) => props.theme.colors.primary};
 

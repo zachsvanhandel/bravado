@@ -50,17 +50,17 @@ const firaSans = {
   }
 };
 
-const fonts = [firaSans];
+const fontFamilies = [firaSans];
 
-const createFontFaces = (fonts) => {
+const createFontFaces = (fontFamilies) => {
   let fontFaces = '';
 
-  for (const font of fonts) {
-    for (const [weight, styles] of Object.entries(font.weights)) {
+  for (const fontFamily of fontFamilies) {
+    for (const [weight, styles] of Object.entries(fontFamily.weights)) {
       for (const [style, formats] of Object.entries(styles)) {
         fontFaces += `
           @font-face {
-            font-family: '${font.name}';
+            font-family: '${fontFamily.name}';
             src: url(${formats.woff2}) format('woff2'),
                 url(${formats.woff}) format('woff');
             font-weight: ${weight};
@@ -75,8 +75,8 @@ const createFontFaces = (fonts) => {
   return fontFaces;
 };
 
-const Fonts = css`
-  ${createFontFaces(fonts)}
+const fonts = css`
+  ${createFontFaces(fontFamilies)}
 `;
 
-export default Fonts;
+export default fonts;

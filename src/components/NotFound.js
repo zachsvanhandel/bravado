@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Main as MainStyle, mixins } from '../styles';
+import { Main as MainStyle } from '../styles';
 import { isAuthenticated } from '../auth';
 import { useLoginLocation } from '../hooks';
 
@@ -35,11 +35,11 @@ const SubText = styled.p`
 `;
 
 const LoginLink = styled(Link)`
-  ${mixins.link}
+  ${(props) => props.theme.mixins.link}
 `;
 
 const Button = styled(Link)`
-  ${mixins.button}
+  ${(props) => props.theme.mixins.button}
 
   margin-top: 1.5rem;
 `;
